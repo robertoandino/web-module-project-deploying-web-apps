@@ -1,12 +1,23 @@
 {
     "version": 2,
     "builds": [
-      { "src": "package.json", "use": "@vercel/static-build" }
+      {
+        "src": "index.html",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "styles/*",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "scripts/*",
+        "use": "@vercel/static"
+      }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/" }
-    ],
-    "rewrites": [
-    {"source": "/(.*)", "destination": "/"}
-]
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ]
   }
