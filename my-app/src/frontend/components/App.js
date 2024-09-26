@@ -12,11 +12,17 @@ function App() {
     setIsDisabled(false)
   }
 
-  const onSubmit = (evt) =>{
+  const onSubmit = (evt) => {
     evt.preventDefault();
-    setTasks([...tasks, task]);
+    setTasks([...tasks, {text: task, completed: false}]);
     setTask('')
     setIsDisabled(true)
+  }
+
+  const onClick = index => {
+    const newTasks = [...tasks]
+    newTasks[index].completed = !newTasks[index].completed
+    setTasks(newTasks)
   }
 
   return (
@@ -33,7 +39,15 @@ function App() {
       </form>
       <h2> Tasks: </h2>
       <ul>
-      {tasks.map((task, index) => <li key={index}>{task}</li>)} 
+      {tasks.map((task, index) => 
+        <li 
+          key={index} 
+          onClick={() => onClick(index)}
+          style = {{ textDecoration: task.completed ? 'line-through' : 'none' }}
+        >
+          {task.text}
+        </li>
+      )} 
       </ul>
     </div>
   );
